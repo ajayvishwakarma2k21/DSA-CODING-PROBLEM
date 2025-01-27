@@ -1,0 +1,21 @@
+class Solution {
+    public int[] asteroidCollision(int[] arr) {
+        Stack<Integer> st = new Stack<>();
+
+        for(int i : arr){
+            while(!st.isEmpty() && i < 0 && st.peek()> 0){
+                if(Math.abs(i) > st.peek()){ // i is negative and stack peek is positive.
+                    st.pop();
+                    continue;
+                }else if(Math.abs(i) == st.peek()){
+                    st.pop();
+                }
+                i = 0;
+            }
+            if( i != 0){
+                st.push(i);
+            }
+        }
+        return st.stream().mapToInt( i -> i).toArray();
+    }
+}
